@@ -1,0 +1,142 @@
+html, body {
+  height: 100%;
+}
+
+.ordenando {
+  background-color: #90a9cb;
+}
+
+p.truncate-60{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#btnAdd {
+  width: 265px;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  color: #fff;
+  border-radius: 5px;
+  padding: 10px 25px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+   box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+   7px 7px 20px 0px rgba(0,0,0,.1),
+   4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+/* 1 */
+.btn-1 {
+  background: rgb(6,14,131);
+  background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+  border: none;
+}
+
+.btn-1:hover {
+  background: rgb(0,3,255);
+background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+}
+
+.titulo {  
+  display: flex;
+  justify-content: center;
+  background-color: #e0e5ec;
+  padding: 30px;
+  border: 1px solid rgb(0, 0, 200);  
+}
+
+.container_2 {
+  
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.row {  
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+#central {
+  background-color: #e0e5ec;
+  padding: 30px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 2px 1px rgba(0, 0, 0, 0.3);
+}
+
+#selectSort {  
+  font-size: 25px;
+  text-align: center;
+  width: 265px;
+  height: 50px;     
+  border: 1px solid #333;
+  border-radius: 4px;  
+}
+
+.input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+#valor { 
+  text-align: center;
+  outline:none;
+  font-size: 25px;
+  width: 265px; 
+  height: 50px;   
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+.list {
+  text-align: justify;
+}
+
+.child {
+  margin: 10px 10px 10px;
+}
+
+.espaco{
+  color: transparent;
+}
+
+
+
+body{  
+  background-color: rgb(224, 141, 53);
+  background-blend-mode: multiply;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bemvindo{
+  text-align: center;
+  color: rgb(219, 81, 81);
+  font-size: 2rem;
+}
+
+@media(max-width: 991px){
+  .sidebar{
+      background-color: rgba(220, 62, 62, 0.8);
+      backdrop-filter: blur(10px);
+  }
+}

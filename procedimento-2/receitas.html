@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="ordenando.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+  crossorigin="anonymous"
+/>
+
+  <title>Catálogo de Receitas</title>
+</head>
+<script>
+  const preencheCatalogo = () => { };
+</script>
+
+<body onload="preencherCatalogo()">
+  <header>
+    <!-- NAVIBAR -->
+
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container">
+        <!-- Togle Btn -->
+        <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- SideBar -->
+        <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="navbarOffcanvasLg"
+          aria-labelledby="navbarOffcanvasLgLabel">
+
+
+          <!-- SiderBar Body -->
+          <div class="offcanvas-body d-flex flex-column flex-lg-row p-4 p-lg-0">
+            <ul class="navbar-nav justify-content-start align-items-center fs-5 flex-grow-1 pe-3">
+              <li class="nav-item mx-2">
+                <a class="nav-link  fs-5" href="/procedimento-1/ordenando.html">Ordenando</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link active fs-4" aria-current="page" href="/procedimento-2/receitas.html">Receita</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link fs-5" href="/procedimento-3/usuarios.html">Usuários</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container-fluid bg-warning h-100 p-2">
+    <h1 style="text-align: center; color: white;">Catálogo de Receitas</h1>
+    <div class="card-deck" id="pnlCatalogo"></div>
+  </main>
+
+  <script>
+    const getListaIngredientes = (ingredientes) => {
+      let ingredientes_li = ingredientes.reduce(function (previousValue, currentValue, index) {
+        if (index == 1) {
+          previousValue = `<li>${previousValue}</li>`;
+        };
+        return previousValue + `<li>${currentValue}</li>`;
+      });
+
+      return `<ul>${ingredientes_li}</ul>`;
+    };
+
+    const getListaPreparos = (preparos) => {
+      let preparos_li = preparos.reduce(function (previousValue, currentValue, index) {
+        if (index == 1) {
+          previousValue = `<li>${previousValue}</li>`;
+        };
+        return previousValue + `<li>${currentValue}</li>`;
+      });
+
+      return `<ol>${preparos_li}</ol>`;
+    };
+
+    const getCard = (receita) => {
+      const painel_catalogo = document.getElementById("pnlCatalogo");
+      painel_catalogo.innerHTML = "";
+
+      let receitas_card = receita.map((item) => {
+        let ingredientes_ul = getListaIngredientes(item.ingredientes);
+        let preparos_ul = getListaPreparos(item.preparo);
+
+        card_html = "";        
+        card_html += `<div class="col-xl-4 col-lg-3 col-md-4 col-sm-6 d-flex ">`;
+        card_html += `<div class="card text-center bg-light">`;
+        card_html += `<img class="card-img-top" src="${item.imagem}" alt="${item.título}">`;
+        card_html += `<div class="card-body">`;
+        card_html += `<h3 class="card-title">${item.título}</h3>`;
+        card_html += `<p class="card-text truncate-60">`;
+        card_html += `<div class="card-text text-center bg-light"><small class="text-muted">${item.tempo}</small></div>`;
+        card_html += `<h5 class="card-title">ingredientes</h5>`;        
+        card_html += ingredientes_ul;
+        card_html += `<hr>`;
+        card_html += `<h5 class="card-title">preparo</h5>`;
+        card_html += preparos_ul;
+        card_html += `</p>`;
+        card_html += `</div>`;
+        card_html += `</div>`;
+
+        painel_catalogo.innerHTML = painel_catalogo.innerHTML + card_html;
+      });
+    };
+
+    const receitas_vector = [
+      {
+        "título": "Arroz Carreteiro",
+        "tempo": "60 min",
+        "imagem": "/assets/arroz.jpeg",
+        "ingredientes": [
+          "3 copos de arroz",
+          "200 g de bacon fatiado",
+          "1 tomate grande bem maduro",
+          "Pimenta calabresa",
+          "Sal",
+          "500 g de carne seca",
+          "200 g de calabresa",
+          "1 cebola grande",
+          "Salsa",
+        ],
+        "preparo": [
+          "Cozinhe a carne seca em panela de pressão, retire, espera esfriar e desfie.",
+          "Reserve.",
+          "Refogue o bacon e a calabresa até ficar bem dourada, acrescentando depois a cebola, tomate, pimenta calabresa e a carne desfiada.",
+          "Após acrescente o arroz, afogue bem, adicione a água corrigindo o sal se necessário e abaixe o fogo aguardando secar.",
+          "Quando pronto, colocar a salsa em cima.",          
+        ],        
+      },  
+      {
+        "título": "Farofa",
+        "tempo": "25 min",
+        "imagem": "/assets/farofa.jpeg",
+        "ingredientes": [
+          "50 g de bacon cortado em cubinhos ou tirinhas",
+          "3 dentes de alho amassados",
+          "1 e 1/2 copo de farinha de mandioca",
+          "1 cenoura ralada",
+          "Sal a gosto",
+          "Salsinha e cebolinha a gosto",
+          "1 cebola bem picada",
+          "3 ovos",
+          "1 tomate picado",
+          "Azeite a gosto",
+          "Pimenta vermelha (tabasco) a gosto",
+        ],
+        "preparo": [
+          "Frite o bacon em um fio de óleo até que esteja bem crocante.",
+          "Coloque a cebola e deixe cozinhar por 2 minutos. Acrescente o alho e misture bem.",
+          "Jogue os ovos por cima, sem mexer. Quando estiverem bem cozidos, misture com cuidado, para deixar pedaços grandes.",
+          "Coloque a farinha e os temperos necessários (sal e pimenta) e deixe fritar por cerca de 4 minutos, sempre mexendo.",
+          "no fogo e desligue.",
+        ],
+        
+      }, 
+      {
+        "título": "Caldo Verde",
+        "tempo": "30 min",
+        "imagem": "/assets/caldo.jpeg",
+        "ingredientes": [
+          "4 batatas médias",
+          "1 colher (sopa) de óleo",
+          "5 xícaras (chá) de água",
+          "1 lingüiça calabresa defumada cortada em rodelas",
+          "1 tablete de caldo de galinha",
+          "1 colher (sopa) rasa de sal ou a gosto",
+          "1 xícara (chá) de couve manteiga cortada em tiras",
+        ],
+        "preparo": [
+          "Na panela de pressão, coloque a batata, o caldo de galinha, o óleo, a água e sal.",
+          "Cozinhe por cerca de 10 minutos (começar a contar o tempo depois que a panela começar a chiar) até a batata desmanchar.",
+          "Em seguida, bata tudo no liquidificador.",
+          "Acrescente as rodelas de calabresa e ferva.",
+          "Desligue o fogo e adicione a couve-manteiga.",
+          "Na hora de servir, coloque um fio de azeite ou croutons",
+        ],
+        
+      }, 
+       
+            
+    ]
+
+    getCard(receitas_vector);
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
